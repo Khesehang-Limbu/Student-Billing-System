@@ -1,0 +1,208 @@
+<% let i; let user_id; %>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>User Dashboard</title>
+        <link rel="stylesheet" href="/css/style.css" type="text/css" />
+        <link rel="stylesheet" href="/css/admin-dash.css" type="text/css" />
+        <link rel="stylesheet" href="/css/user-dash.css" type="text/css" />
+        <link rel="stylesheet" href="/css/overlay_form.css" type="text/css" />
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="dash-nav">
+                <img src="/images/sbs-logo.png" />
+
+                <ul class="dash-items">
+                    <li class="dash-item"><img src="/images/dashboard.png" alt=""><a href="#">Overview</a></li>
+                    <li class="dash-item"><img src="/images/reading.png" alt=""><a href="#">Manage Bills</a></li>
+                    <li class="dash-item"><img src="/images/exit.png" alt=""><a href="/logout">Log Out</a></li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <div class="content-head">
+                    <div>
+                        <img src="/images/man.png" alt="">
+                        <h2>
+                            <%= user_name %>
+                        </h2>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="card-container">
+                    <div class="card">
+                        <h2>Semester Details</h2>
+                        <h2>Total : 8</h2>
+                        <h2>Students : 100</h2>
+                    </div>
+
+                    <div class="card">
+                        <h2>Dues Details</h2>
+                        <h2>Bills Dispatched : 100</h2>
+                        <h2>Bills Acknowledged : 50</h2>
+                    </div>
+                </div>
+
+                <div class="bills" id="students">
+                    <div>
+                        <h2>All Students</h2>
+                        <% i=1; %>
+                            <table>
+                                <thead>
+                                    <th>SN</th>
+                                    <th>Full Name</th>
+                                    <th>Account Status</th>
+                                    <th>Action</th>
+                                </thead>
+                                <% users.forEach(user=> { %>
+                                    <% if (user.type_of_user==="student" ) { %>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <% j=1; %>
+                                                        <%= j++ %>
+                                                </td>
+                                                <td>
+                                                    <%= user.fullname %>
+                                                </td>
+                                                <td>
+                                                    <%= user.account_status %>
+                                                </td>
+                                                <td>
+                                                    <% user_id = user._id %>
+                                                        <div class="ocontainer">
+                                                            <a data-modal="modal-one" class="btn-primary" name="issue"
+                                                                id="<%= user_id %>">
+                                                                Issue
+                                                            </a>
+                                                        </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <% } %>
+                                            <% }) %>
+                            </table>
+
+                            <div class="issue-form modal" id="modal-one">
+                                <form action="/issue" method="post">
+                                    <div class="form-field bill-field">
+                                        <label for="issued_date" class="bill-label">Issued Date : </label>
+                                        <input type="date" name="issued_date" id="issued_date" />
+                                    </div>
+                                    <div class="form-field bill-field">
+                                        <label for="issued_amount" class="bill-label">Rs.</label>
+                                        <input type="text" name="issued_amount" id="issued_amount" />
+                                    </div>
+                                    <div class="form-field bill-field">
+                                        <input type="hidden" name="issuer" value="<%= user_name %>" />
+                                    </div>
+                                    <input type="hidden" name="student_id" />
+                                    <div class="form-field">
+                                        <button type="submit" class="btn-primary">Issue</button>
+                                        <button class="modal-close modal-exit">X</button>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="paid-bills" id="paid_bills">
+                    <div>
+                        <h2>Bills Paid By Students</h2>
+                        <% i=1; %>
+                        <table>
+                            <thead>
+                                <th>SN</th>
+                                <th>Full Name</th>
+                                <th>Semester</th>
+                                <th>Bill Status</th>
+                                <th>Action</th>
+                            </thead>
+                            <% users.forEach(user=> { 
+                                console.log(user.bill);
+                                %>
+                                <% if (user.type_of_user==="student" ) { 
+                                    user.bill.forEach(eachBill=> {
+                                %>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <% j=1; %>
+                                                    <%= j++ %>
+                                            </td>
+                                            <td>
+                                                <%= user.semester %>
+                                            </td>
+                                            <td>
+                                                <%= user.fullname %>
+                                            </td>
+                                            <td>
+                                                <%= eachBill.payment_status %>
+                                            </td>
+                                            <td>
+                                                <% user_id=user._id; payment=user.payment; %>
+                                                    <div class="ocontainer">
+                                                        <a data-modal="modal-two" data-bill_id="<%=  eachBill.bill_id %>"
+                                                            class="btn-primary" name="verify"
+                                                            id="<%= user_id %>">Verify
+                                                        </a>
+                                                    </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <% }) %>
+                                <% } %>
+                            <% }) %>
+                        </table>
+
+                        <div class="verify-form modal" id="modal-two">
+                            <form action="/verify" method="post">
+                                <figure class="bill">
+                                    <img src="" alt="">
+                                </figure>
+
+                                <div>
+                                    <input type="text" class="bill_amount" name="amount">
+                                </div>
+
+                                <input type="hidden" name="student_id" />
+                                <input type="hidden" name="bill_id" />
+
+                                <div class="form-field">
+                                    <button type="submit" class="btn-primary">Verify</button>
+                                    <a class="btn-primary" href="/reject">Reject</a>
+                                    <button class="modal-close modal-exit">X</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <script src="/js/staff/staff_nav.js" type="text/javascript"></script>
+            <script src="/js/staff/staff_overlay.js" type="text/javascript"></script>
+
+            <script>
+                var loadFile = function (event) {
+                    var output = document.getElementById('output');
+                    output.src = URL.createObjectURL(event.target.files[0]);
+                    output.onload = function () {
+                        URL.revokeObjectURL(output.src) // free memory
+                    }
+                };
+
+            </script>
+    </body>
+
+    </html>
+
+    <%- include("../partials/footer.ejs") %>

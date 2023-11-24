@@ -1,0 +1,32 @@
+<%- include("../partials/header.ejs") %>
+
+    <form method="POST" action="/login" class="form-body" id="register">
+        <h2 class="header"> Student Register </h2>
+        <input class="form-field first-field" type="text" placeholder="Full Name" name="fullname" value="" />
+        <input type="email" placeholder="E-Mail" name="email" value="" />
+        <input type="password" placeholder="Password" name="password" value="" />
+        <input type="password" placeholder="Confrim Password" name="cpassword" value="" />
+        <input type="text" placeholder="Phone Number" name="ph_number" value="" />
+        <input class="form-field last-field" type="text" placeholder="Faculty" name="faculty" value="" />
+        <input type="hidden" name="semester" value="1" />
+        <!-- <input type="text" name="batch" placeholder="Batch"> -->
+        <!-- <input class="form-field last-field" type="text" placeholder="Due Amount" name="due_amount" value=""/> -->
+        <input type="hidden" name="type_of_user" value="student" />
+        <input type="hidden" name="route" value="" />
+
+        <div class="remember-me">
+            <label htmlFor="remember">
+                <input type="checkbox" id="remember" value="1" />Remember Me
+            </label>
+        </div>
+
+        <button class="btn-primary" type="submit" name="submit">Register</button>
+        <div class="register">
+            <a class="btn-primary" href="./login/student" name="login">Login</a>
+        </div>
+    </form>
+
+    <script src="js/login.js"></script>
+    <script type="module" src="js/student/student_validation.js"></script>
+
+    <%- include("../partials/footer.ejs")%>

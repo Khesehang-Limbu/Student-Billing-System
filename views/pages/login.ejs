@@ -1,0 +1,40 @@
+<%- include("../partials/header.ejs"); %>
+<% let type; %>
+<% if (title==="Student Login" ) { %>
+    <% type="student" %>
+<% } else if (title==="Staff Login" ){ %>
+    <% type="staff" ; %>
+<% }else { %>
+    <% type="admin" ; %>
+<% } %>
+
+<% if (error){ %>
+    <span class="error"><%= error %></span>
+<% } %>
+
+<form method="POST" action="/login" class="form-body">
+    <h2 class="header">
+        <%= title %>
+    </h2>
+    <input class="form-field first-field" type="text" placeholder=<%=placeholder
+        %> name="email" value=""/>
+        
+    <input class="form-field last-field" type="password" placeholder="Password"
+        name="passwd" value="" />
+
+    <input type="hidden" name="type_of_user" value=<%=type %> />
+
+    <input type="hidden" name="route" value="" />
+
+    <div class="remember-me">
+        <label htmlFor="remember">
+            <input type="checkbox" id="remember" />Remember Me
+        </label>
+    </div>
+    <button class="btn-primary" type="submit" name="submit">Login</button>
+</form>
+
+<script src="/js/login.js"></script>
+<!-- <script type="module" src="/js/staff/login_validation.js"></script> -->
+
+<%- include("../partials/footer.ejs") %>

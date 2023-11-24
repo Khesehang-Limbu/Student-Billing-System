@@ -1,0 +1,68 @@
+.card-container {
+    height: 450px;
+    width: 90%;
+    margin-top: 50px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
+    padding: 3%;
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    column-gap: 5%;
+}
+
+.card {
+    height: 100%;
+    line-height: 1.5;
+    width: 80%;
+    box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 5px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.payment-form, 
+.issue-form,
+.verify-form {
+    width: 850px;
+    background-color: white;
+    height: 550px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.bill-field{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+}
+
+.bill-label {
+    font-size: var(--header-font-size);
+    font-family: var(--header-font);
+}
+
+#output {
+    height: 300px;
+    width: 300px;
+}
+
+.bill-field input{
+    margin-bottom: 0;
+}
+
+.profile-section {
+    background-color: white;
+    color: #78C1F3;
+}
+
+.profile-section h1{
+    text-align: center;
+}
+
+.profile-section h2 {
+    text-align: left;
+}
+
+
