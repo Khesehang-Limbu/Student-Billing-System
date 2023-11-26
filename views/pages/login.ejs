@@ -20,7 +20,7 @@
         %> name="email" value=""/>
         
     <input class="form-field last-field" type="password" placeholder="Password"
-        name="passwd" value="" />
+        name="password" value="" />
 
     <input type="hidden" name="type_of_user" value=<%=type %> />
 
@@ -34,7 +34,6 @@
     <button class="btn-primary" type="submit" name="submit">Login</button>
 </form>
 
-<script src="/js/login.js"></script>
-<!-- <script type="module" src="/js/staff/login_validation.js"></script> -->
+<script type="module" src="/js/staff/login_validation.js"></script>
 
 <%- include("../partials/footer.ejs") %>

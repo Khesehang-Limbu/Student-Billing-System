@@ -22,7 +22,6 @@ class User {
                     semester: user.semester,
                     ph_number: user.ph_number,
                     type_of_user: user.type_of_user,
-                    // batch: user.batch
                 });
 
                 user_schema = {
@@ -33,7 +32,6 @@ class User {
                     "semester": usr.semester,
                     "ph_number": usr.ph_number,
                     "type_of_user": usr.type_of_user,
-                    "batch": usr.batch,
                     "account_status": "Pending"
                 }
             } else {

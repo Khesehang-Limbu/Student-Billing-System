@@ -3,10 +3,9 @@ import {validateEmail, validateFullName, validatePassword, validatePhoneNumber} 
 const register_path = window.location.pathname;
 const register_input = document.querySelector("[name='route']");
 const login_form = document.querySelector("form");
-const errors = [];
-console.log(login_form);
+let errors = [];
+
 login_form.addEventListener("submit", function (event) {
-    event.preventDefault();
 
     const email = login_form.email.value;
     const password = login_form.password.value;
@@ -18,6 +17,8 @@ login_form.addEventListener("submit", function (event) {
     let is_empty = false;
     let is_correct = true;
     let is_all_test = true;
+
+    console.log(errors);
 
     if ((email !== "") && (password !== "")) {
         if (is_email_ok && is_password_ok) {
@@ -36,13 +37,13 @@ login_form.addEventListener("submit", function (event) {
     errors.push(is_correct);
     errors.push(is_all_test);
 
-    console.log(errors);
-
-    if ((errors[0] === false) && (errors[1] !== true) && (errors[2].is_all_test !== true)){
-
+    if ((errors[0] === false) && (errors[1] === true) && (errors[2] === true)){
+        console.log("All Set");
         register_input.setAttribute("value", register_path);        
     }else {
+        console.log("errors");
         event.preventDefault();
+        errors = [];
         document.cookie = ("errors", errors);
     }
 })

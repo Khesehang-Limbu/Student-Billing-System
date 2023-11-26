@@ -76,7 +76,7 @@
                                                     <%= user.account_status %>
                                                 </td>
                                                 <td>
-                                                    <% user_id = user._id %>
+                                                    <% user_id=user._id %>
                                                         <div class="ocontainer">
                                                             <a data-modal="modal-one" class="btn-primary" name="issue"
                                                                 id="<%= user_id %>">
@@ -117,71 +117,70 @@
                     <div>
                         <h2>Bills Paid By Students</h2>
                         <% i=1; %>
-                        <table>
-                            <thead>
-                                <th>SN</th>
-                                <th>Full Name</th>
-                                <th>Semester</th>
-                                <th>Bill Status</th>
-                                <th>Action</th>
-                            </thead>
-                            <% users.forEach(user=> { 
-                                console.log(user.bill);
-                                %>
-                                <% if (user.type_of_user==="student" ) { 
-                                    user.bill.forEach(eachBill=> {
-                                %>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <% j=1; %>
-                                                    <%= j++ %>
-                                            </td>
-                                            <td>
-                                                <%= user.semester %>
-                                            </td>
-                                            <td>
-                                                <%= user.fullname %>
-                                            </td>
-                                            <td>
-                                                <%= eachBill.payment_status %>
-                                            </td>
-                                            <td>
-                                                <% user_id=user._id; payment=user.payment; %>
-                                                    <div class="ocontainer">
-                                                        <a data-modal="modal-two" data-bill_id="<%=  eachBill.bill_id %>"
-                                                            class="btn-primary" name="verify"
-                                                            id="<%= user_id %>">Verify
-                                                        </a>
-                                                    </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <% }) %>
-                                <% } %>
-                            <% }) %>
-                        </table>
+                            <table>
+                                <thead>
+                                    <th>SN</th>
+                                    <th>Full Name</th>
+                                    <th>Semester</th>
+                                    <th>Bill Status</th>
+                                    <th>Action</th>
+                                </thead>
+                                <% users.forEach(user=> {
+                                    console.log(user.bill);
+                                    %>
+                                    <% if (user.type_of_user==="student" ) { if (user.bill !==undefined){
+                                        user.bill.forEach(eachBill=> {
+                                        %>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <% j=1; %>
+                                                        <%= j++ %>
+                                                </td>
+                                                <td>
+                                                    <%= user.fullname %>
+                                                </td>
+                                                <td>
+                                                    <%= user.semester %>
+                                                </td>
+                                                <td>
+                                                    <%= eachBill.payment_status %>
+                                                </td>
+                                                <td>
+                                                    <% user_id=user._id; payment=user.payment; %>
+                                                        <div class="ocontainer">
+                                                            <a data-modal="modal-two"
+                                                                data-bill_id="<%=  eachBill.bill_id %>"
+                                                                class="btn-primary" name="verify"
+                                                                id="<%= user_id %>">Verify
+                                                            </a>
+                                                        </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <% }) } } }) %>
+                            </table>
 
-                        <div class="verify-form modal" id="modal-two">
-                            <form action="/verify" method="post">
-                                <figure class="bill">
-                                    <img src="" alt="">
-                                </figure>
+                            <div class="verify-form modal" id="modal-two">
+                                <form action="/verify" method="post">
+                                    <figure class="bill">
+                                        <img src="" alt="">
+                                    </figure>
 
-                                <div>
-                                    <input type="text" class="bill_amount" name="amount">
-                                </div>
+                                    <div>
+                                        <input type="text" class="bill_amount" name="amount">
+                                    </div>
 
-                                <input type="hidden" name="student_id" />
-                                <input type="hidden" name="bill_id" />
+                                    <input type="hidden" name="student_id" />
+                                    <input type="hidden" name="bill_id" />
 
-                                <div class="form-field">
-                                    <button type="submit" class="btn-primary">Verify</button>
-                                    <a class="btn-primary" href="/reject">Reject</a>
-                                    <button class="modal-close modal-exit">X</button>
-                                </div>
-                            </form>
-                        </div>
+                                    <div class="form-field">
+                                        <button type="submit" class="btn-primary">Verify</button>
+                                        <a class="btn-primary" href="/reject">Reject</a>
+                                        <button class="modal-close modal-exit">X</button>
+                                    </div>
+                                </form>
+                            </div>
                     </div>
                 </div>
 

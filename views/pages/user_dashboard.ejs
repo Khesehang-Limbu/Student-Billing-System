@@ -1,6 +1,11 @@
 <% 
-let nr=new Intl.NumberFormat('en-US', { style: 'currency' , currency: 'NEP' , }); 
+let nr = new Intl.NumberFormat('en-US', { style: 'currency' , currency: 'NEP' , }); 
 let bills = (user.bill !== undefined) ? user.bill : 0;
+let j = 1;
+let total_bills = (user.bill !== undefined) ? user.bill.reduce(bill => {
+    return j += 1; 
+}) : 0;
+console.log(total_bills);
 %>
     <!DOCTYPE html>
     <html lang="en">
@@ -42,14 +47,14 @@ let bills = (user.bill !== undefined) ? user.bill : 0;
                 <div class="card-container">
                     <div class="card">
                         <h2>Total Bills</h2>
-                        <h2>Bills Paid : 8</h2>
-                        <h2>Bills Left : 4</h2>
+                        <h2>Bills Incurred : <%= total_bills %></h2>
+                        <h2>Bills Left : <%= 8 - total_bills %></h2>
                     </div>
 
                     <div class="card">
                         <h2>Details</h2>
-                        <h2>Current Semester : 4</h2>
-                        <h2>Bill Status : Unpaid</h2>
+                        <h2>Current Semester : <%= user.semester %></h2>
+                        <h2>Bill Status : Paid</h2>
                     </div>
 
                     <div class="card">

@@ -196,3 +196,10 @@ a.btn-primary {
     padding: 3%;
     font-size: 1.5rem;
 }
+
+/* Register Page Media Query */
+@media screen and ((max-width: 768px)){
+    .form-body {
+        width: 35%;
+    }
+}
