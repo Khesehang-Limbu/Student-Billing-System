@@ -1,38 +1,68 @@
-<%- include("../partials/header.ejs"); %>
-<% let type; %>
-<% if (title==="Student Login" ) { %>
-    <% type="student" %>
-<% } else if (title==="Staff Login" ){ %>
-    <% type="staff" ; %>
-<% }else { %>
-    <% type="admin" ; %>
-<% } %>
+<%- include("../partials/header.ejs"); %> 
+
+<% let type; %> 
+<% if (title ==="Student Login" ) { %>  
+<%    type="student" %>  
+<% } else if (title ==="Staff Login" ){ %>  
+<%    type="staff" ; %>  
+<% }else { %> 
+<%    type="admin"; %>  
+<% } %>  
 
 <% if (error){ %>
-    <span class="error"><%= error %></span>
+    <span class="error"> <%= error %> </span>
 <% } %>
 
-<form method="POST" action="/login" class="form-body">
-    <h2 class="header">
-        <%= title %>
-    </h2>
-    <input class="form-field first-field" type="text" placeholder=<%=placeholder
-        %> name="email" value=""/>
-        
-    <input class="form-field last-field" type="password" placeholder="Password"
-        name="password" value="" />
+<div class="wrap_form_wrapper">
+  <div class="form_wrapper">
+    <div class="form_container">
+      <div class="title_container">
+        <h2 class="header"><%= title %></h2>
+      </div>
 
-    <input type="hidden" name="type_of_user" value=<%=type %> />
+      <div class="row clearfix">
+        <div class="">
+          <form method="POST" action="/login" class="form-body">
+            <div class="input_field">
+              <input
+                class="form-field first-field"
+                type="text"
+                placeholder="Email"
+                name="email" value=""/>
+              <div class="error"></div>
+            </div>
 
-    <input type="hidden" name="route" value="" />
+            <div class="input_field">
+              <input
+                class="form-field last-field"
+                type="password"
+                placeholder="Password"
+                name="password"
+                value=""
+              />
+              <div class="error"></div>
+            </div>
 
-    <div class="remember-me">
-        <label htmlFor="remember">
-            <input type="checkbox" id="remember" />Remember Me
-        </label>
+            <div class="input_field">
+              <input type="hidden" name="type_of_user" value=<%= type %>
+              />
+              <div class="error"></div>
+            </div>
+
+            <input type="hidden" name="route" value="" />
+
+            <div class="input_field checkbox_option">
+              <input type="checkbox" id="remember" />
+              <label for="cb1">I agree with terms and conditions</label>
+            </div>
+
+            <input class="button" type="submit" name="submit" value="Login" />
+          </form>
+        </div>
+      </div>
     </div>
-    <button class="btn-primary" type="submit" name="submit">Login</button>
-</form>
+  </div>
+</div>
 
 <script type="module" src="/js/staff/login_validation.js"></script>
 

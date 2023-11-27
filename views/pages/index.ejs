@@ -1,30 +1,87 @@
 <%- include("../partials/header.ejs") %>
+<div class="wrap_form_wrapper">
 
-    <form method="POST" action="/login" class="form-body" id="register">
-        <h2 class="header"> Student Register </h2>
-        <input class="form-field first-field" type="text" placeholder="Full Name" name="fullname" value="" />
-        <input type="email" placeholder="E-Mail" name="email" value="" />
-        <input type="password" placeholder="Password" name="password" value="" />
-        <input type="password" placeholder="Confrim Password" name="cpassword" value="" />
-        <input type="text" placeholder="Phone Number" name="ph_number" value="" />
-        <input class="form-field last-field" type="text" placeholder="Faculty" name="faculty" value="" />
-        <input type="hidden" name="semester" value="1" />
-        <input type="hidden" name="type_of_user" value="student" />
-        <input type="hidden" name="route" value="" />
+    <div class="form_wrapper">
+        <div class="form_container">
+            <div class="title_container">
+                <h2>Student Registration</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="">
+                    <form method="POST" action="/login" id="register">
+                        <div class="input_field">
+                            <input class="form-field first-field" type="text" placeholder="Full Name" name="fullname"
+                                value="" required />
+                            <div class="error"></div>
+                        </div>
 
-        <div class="remember-me">
-            <label htmlFor="remember">
-                <input type="checkbox" id="remember" value="1" />Remember Me
-            </label>
+                        <div class="input_field">
+                            <input type="email" placeholder="E-Mail" name="email" value="" />
+                            <div class="error"></div>
+                        </div>
+
+                        <div class="input_field">
+                            <input type="password" placeholder="Password" name="password" value="" />
+                            <div class="error"></div>
+                        </div>
+
+                        <div class="input_field">
+                            <input type="password" placeholder="Confrim Password" name="cpassword" value="" />
+                            <div class="error"></div>
+                        </div>
+
+                        <div class="input_field">
+                            <input type="text" placeholder="Phone Number" name="ph_number" value="" />
+                            <div class="error"></div>
+                        </div>
+
+                        <div class="input_field">
+                            <input class="form-field last-field" type="text" placeholder="Faculty" name="faculty"
+                                value="" />
+                            <div class="error"></div>
+                        </div>
+
+
+                        <input type="hidden" name="semester" value="1" />
+                        <input type="hidden" name="type_of_user" value="student" />
+                        <input type="hidden" name="route" value="" />
+
+                        <div class="input_field radio_option">
+                            <label for="rd1">
+                                <input type="radio" name="gender" id="rd1" value="male"> Male
+                            </label>
+                            <label for="rd2">
+                                <input type="radio" name="gender" id="rd2" value="female"> Female
+                            </label>
+                            <div class="error"></div>
+                        </div>
+
+                        <!-- <div class="input_field select_option">
+                            <select>
+                                <option>Select a country</option>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                            </select>
+                            <div class="select_arrow"></div>
+                        </div> -->
+
+                        <div class="input_field checkbox_option">
+                            <input type="checkbox" id="cb1">
+                            <label for="cb1">I agree with terms and conditions</label>
+                        </div>
+
+                        <input class="button" type="submit" value="Register" />
+
+                        <div class="register">
+                            <a class="btn-primary" href="./login/student" name="login">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <button class="btn-primary" type="submit" name="submit">Register</button>
-        <div class="register">
-            <a class="btn-primary" href="./login/student" name="login">Login</a>
-        </div>
-    </form>
-
-    <script src="js/login.js"></script>
-    <script type="module" src="js/student/student_validation.js"></script>
+    </div>
+</div>
 
     <%- include("../partials/footer.ejs")%>
+        <!-- <script src="js/login.js"></script> -->
+        <script type="module" src="js/student/student_validation.js"></script>

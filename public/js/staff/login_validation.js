@@ -1,47 +1,30 @@
-import {validateEmail, validateFullName, validatePassword, validatePhoneNumber} from "/js/client_side_validation.js";
+import {validateInputs} from "/js/client_side_validation.js";
 
 const register_path = window.location.pathname;
 const register_input = document.querySelector("[name='route']");
-const login_form = document.querySelector("form");
-const title = document.querySelector(".header").innerHTML;
 
-let errors = [];
+const type_of_user = document.querySelector("[name='type_of_user']").value;
+const login_form = document.querySelector("form");
+
+const email = login_form.email;
+const password = login_form.password;
+
+const user_details = {
+    email : email,
+    password : password    
+}
 
 login_form.addEventListener("submit", function (event) {
-
-    const email = login_form.email.value;
-    const password = login_form.password.value;
-
-    const is_email_ok = validateEmail(email);
-    const is_password_ok = validatePassword(password);
-
-    let is_empty = false;
-    let is_all_test = true;
-
-    if ((email !== "") && (password !== "")) {
-        if (is_email_ok && is_password_ok) {
-        }else{
-            is_all_test= false;
+    if (type_of_user === "student"){
+        if (!validateInputs("student", "login", user_details)) {
+            event.preventDefault();
         }
-    }else{
-        is_empty = true;
-    }
-
-    if (title.trim() === "Admin Login"){
-        is_all_test = true;
-    }
-
-    errors.push(is_empty);
-    errors.push(is_all_test);
-
-    console.log(errors);
-
-    if ((errors[0] === false) && (errors[1] === true)){
-        register_input.setAttribute("value", register_path);        
-    }else {
-        event.preventDefault();
-        errors = [];
-        document.cookie = ("errors", errors);
+    }else if (type_of_user === "staff"){
+        if (!validateInputs("staff", "login", user_details)) {
+            event.preventDefault();
+        }
     }
 })
+
+
 
