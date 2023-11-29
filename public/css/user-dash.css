@@ -64,12 +64,3 @@
 .profile-section h2 {
     text-align: left;
 }
-
-@media (max-width: 480px) and (min-width: 0) {
-    .content-head h2 {
-        font-size: 1.5rem;
-    }
-}
-
-
-

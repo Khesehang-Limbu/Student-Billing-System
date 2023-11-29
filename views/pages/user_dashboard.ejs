@@ -1,12 +1,9 @@
-<% 
-let nr = new Intl.NumberFormat('en-US', { style: 'currency' , currency: 'NEP' , }); 
-let bills = (user.bill !== undefined) ? user.bill : 0;
-let j = 1;
-let total_bills = (user.bill !== undefined) ? user.bill.reduce(bill => {
-    return j += 1; 
-}) : 0;
-console.log(total_bills);
-%>
+<% let nr=new Intl.NumberFormat('en-US', { style: 'currency' , currency: 'NEP' , }); let bills=(user.bill !==undefined)
+    ? user.bill : 0; let j=1; let total_bills=(user.bill !==undefined) ? user.bill.reduce(bill=> {
+    return j += 1;
+    }) : 0;
+    console.log(total_bills);
+    %>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -18,22 +15,42 @@ console.log(total_bills);
         <link rel="stylesheet" href="/css/admin-dash.css" type="text/css" />
         <link rel="stylesheet" href="/css/user-dash.css" type="text/css" />
         <link rel="stylesheet" href="/css/overlay_form.css" type="text/css" />
+        <!-- <link rel="stylesheet" href="/css/dashboard.css" type="text/css"> -->
     </head>
 
     <body>
-        <div class="container">
-            <div class="dash-nav">
-                <img src="/images/sbs-logo.png" />
+        <div class="side-bar">
+            <div class="logo-name-wrapper">
 
-                <ul class="dash-items">
-                    <li class="dash-item"><img src="/images/dashboard.png" alt=""><a href="#">Overview</a></li>
-                    <li class="dash-item"><img src="/images/settings.jpg" alt=""><a href="#">Edit Profile</a></li>
-                    <li class="dash-item"><img src="/images/reading.png" alt=""><a href="#">Fee Details</a></li>
-                    <li class="dash-item"><img src="/images/exit.png" alt=""><a href="/logout">Log Out</a></li>
-                </ul>
+                <div class="logo-name">
+                    <img src="/images/sbs-logo.png" class="logo" />
+                    <span class="logo-name__name">SBS</span>
+                </div>
+
+                <button class="logo-name__button">
+                    <i class="bx bx-arrow-from-right logo-name__icon" id="logo-name__icon"></i>
+                </button>
+
             </div>
 
-            <div class="content-section">
+            <ul class="nav-items">
+                <li class="nav-item active">
+                    <img src="/images/dashboard.png" alt=""><a href="#">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <img src="/images/settings.jpg" alt=""><a href="#">Edit Profile</a>
+                </li>
+                <li class="nav-item">
+                    <img src="/images/reading.png" alt=""><a href="#">Fee Details</a>
+                </li>
+                <li class="nav-item">
+                    <img src="/images/exit.png" alt=""><a href="/logout">Log Out</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container">
+             <div class="content-section">
                 <div class="content-head">
                     <div>
                         <img src="/images/man.png" alt="">
@@ -47,13 +64,16 @@ console.log(total_bills);
                 <div class="card-container">
                     <div class="card">
                         <h2>Total Bills</h2>
-                        <h2>Bills Incurred : <%= total_bills %></h2>
-                        <h2>Bills Left : <%= 8 - total_bills %></h2>
+                        <h2>Bills Incurred : <%= total_bills %>
+                        </h2>
+                        <h2>Bills Left : <%= 8 - total_bills %>
+                        </h2>
                     </div>
 
                     <div class="card">
                         <h2>Details</h2>
-                        <h2>Current Semester : <%= user.semester %></h2>
+                        <h2>Current Semester : <%= user.semester %>
+                        </h2>
                         <h2>Bill Status : Paid</h2>
                     </div>
 
@@ -77,15 +97,15 @@ console.log(total_bills);
                                 <h2>Semester : <%= user.semester %><sup>th</sup></h2>
                                 <h2>Phone Number : <%= user.ph_number %>
                                 </h2>
-                                <% if (user.account_status !== "Pending") { %>
+                                <% if (user.account_status !=="Pending" ) { %>
                                     <h2>Remaining Fees : <span style="color: green;">
                                             <%= nr.format(user.due_amount) %>
                                         </span></h2>
-                                <% } %>
-                                <h2 class="data-modal" name="edit">
-                                    <a class="btn-primary" id="<%= user._id %>" name="student_id">Edit</a>
-                                </h2>
-                                <% } %>
+                                    <% } %>
+                                        <h2 class="data-modal" name="edit">
+                                            <a class="btn-primary" id="<%= user._id %>" name="student_id">Edit</a>
+                                        </h2>
+                                        <% } %>
                         </div>
 
                         <div class="modal" id="modal-two">
@@ -143,10 +163,7 @@ console.log(total_bills);
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                <% 
-                                let i = 0;
-                                for (i; i < bills.length ? bills.length : 0; i++){
-                                %>
+                                <% let i=0; for (i; i < bills.length ? bills.length : 0; i++){ %>
                                     <tr>
                                         <td>
                                             <%= i+1 %>
@@ -171,11 +188,12 @@ console.log(total_bills);
                                         </td>
                                         <td>
                                             <div class="ocontainer data-modal" name="pay">
-                                                <a class="btn-primary" id="<%= bills[i].bill_id %>" name="pay_button">Pay</a>
+                                                <a class="btn-primary" id="<%= bills[i].bill_id %>"
+                                                    name="pay_button">Pay</a>
                                             </div>
                                         </td>
                                     </tr>
-                                <% } %>
+                                    <% } %>
                             </tbody>
                         </table>
                     </div>
@@ -190,7 +208,7 @@ console.log(total_bills);
                                 <label for="bill_amount" class="bill-label">Rs.</label>
                                 <input type="text" name="bill_amount" id="bill_amount" placeholder="Bill Amount" />
                             </div>
-                            <input type="hidden" name="student_id" value=<%= user._id %> />
+                            <input type="hidden" name="student_id" value=<%=user._id %> />
                             <input type="hidden" name="bill_id" />
                             <div class="form-field">
                                 <img id="output" />
